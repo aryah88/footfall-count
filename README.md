@@ -1,48 +1,16 @@
-**AI Footfall Counter using Computer Vision**
+**AI-Based Footfall Counter using Computer Vision**
 
-This project is a computer vision-based footfall counter that detects and counts the number of people entering and exiting a predefined region of interest (ROI) in a video stream. The goal is to provide an automated solution for monitoring crowd flow and occupancy using object detection and tracking.
+This project implements an AI-driven system that automatically counts the number of people entering and exiting a region of interest (ROI) in real-time video streams or recorded footage. Each detected person is assigned a unique ID through object tracking, which allows the system to follow individuals across frames and avoid duplicate detections.
 
-Problem Statement
+The counter logic works by comparing a tracked person’s position across consecutive frames relative to a defined ROI band. When a person’s trajectory crosses the upper and lower boundaries of the ROI in a downward direction, it is recorded as an entry; when the movement is in the opposite direction, it is registered as an exit. Each ID is uniquely associated with a detected person during their visible presence in the frame, ensuring consistent tracking and accurate footfall monitoring.
 
-The task was to design an AI-based footfall counter capable of accurately identifying people and counting their movement across an ROI in a given video feed or live stream. The system should maintain separate counts for entries and exits while ensuring that repeated detections of the same person are avoided.
+A future improvement involves refining the logic to make the counting process strictly singular per unique ID, ensuring that one person is counted only once during their full path across the ROI even under prolonged visibility or occlusions.
 
-Approach
+The entire system uses YOLOv8 for human detection and ByteTrack for identity-preserving object tracking. The detection results are processed in real time using OpenCV, with tracking data stored in structured logs. These logs feed a FastAPI-based backend that provides analytical endpoints and visual insights.
 
-YOLOv8 from the Ultralytics framework was used for real-time person detection.
+The FastAPI layer generates JSON-based statistics for total entries, exits, and current occupancy levels. It also produces automatic charts and trends using Matplotlib and Seaborn to visualize cumulative activity, entry-exit distributions, and overall flow patterns. The charts update dynamically and can be accessed through lightweight API calls, offering quick visibility into real-time and historical footfall data without any external frontend framework.
 
-The Supervision library’s ByteTrack algorithm was integrated for object tracking, which assigns unique IDs to each detected person to maintain tracking consistency across frames.
-
-A region of interest (ROI) band was defined across the frame. When a tracked person’s centroid crosses this region in a particular direction, the system updates the entry or exit count accordingly.
-
-OpenCV was used to process frames, visualize bounding boxes, ROI lines, and live counts directly on the output stream.
-
-The solution works for both live webcam streams and pre-recorded video files.
-
-Implementation Details
-
-Model: YOLOv8n pretrained on the COCO dataset.
-
-Tracker: ByteTrack via the Supervision library.
-
-Environment: Python with OpenCV for frame handling and display.
-
-ROI Logic: A horizontal band defined between 35% and 85% of the frame height to detect directional crossings.
-
-Output: Processed frames showing live detections, ROI lines, and updated entry/exit counts.
-
-Results and Observations
-
-The system successfully detects and tracks people in real time.
-
-The counting mechanism updates accurately when people move across the ROI.
-
-For scenes with strong perspective (e.g., corridor views), adjusting ROI ratios or using a trapezoidal ROI improves performance.
-
-The application runs smoothly on standard hardware and supports both saved videos and webcam input.
-
-Reflection
-
-The main challenge was designing a robust counting mechanism that differentiates between people entering and exiting within a perspective view. Using a centroid-based tracking approach and an adaptive ROI band helped improve accuracy. Future enhancements could include perspective correction, dynamic ROI adjustment, and web-based visualization for real-time analytics.
+This combination of real-time computer vision, tracking consistency, and automated analytics provides a practical approach to people counting and flow analysis, applicable to environments such as retail spaces, campuses, and smart surveillance systems.
 
 **Expected OUTPUT**
 <img width="1918" height="1079" alt="image" src="https://github.com/user-attachments/assets/7377e78f-454f-4339-a8b9-4f23babbdfd7" />
