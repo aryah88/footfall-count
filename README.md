@@ -16,5 +16,7 @@ This combination of real-time computer vision, tracking consistency, and automat
 <img width="1918" height="1079" alt="image" src="https://github.com/user-attachments/assets/7377e78f-454f-4339-a8b9-4f23babbdfd7" />
 <img width="734" height="324" alt="image" src="https://github.com/user-attachments/assets/37bd5d62-5954-436a-a162-aaabe1458e06" />
 <img width="849" height="702" alt="image" src="https://github.com/user-attachments/assets/45c5a88a-68ec-472c-a345-7b2e898a78f4" />
+<img width="1242" height="779" alt="image" src="https://github.com/user-attachments/assets/6187fd1f-7f02-449a-9e79-a94fba2e4c01" />
+
 
 
